@@ -6,10 +6,8 @@ import { auth } from "@clerk/nextjs/server";
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  api_secret: process.env.CLOUDINARY_API_SECRET, // Click 'View Credentials' below to copy your API secret
 });
-
-console.log(cloudinary);
 
 interface CloudinaryUploadResult {
   public_id: string;
@@ -17,7 +15,7 @@ interface CloudinaryUploadResult {
 }
 
 export async function POST(request: NextRequest) {
-  const { userId } = await auth();
+  const { userId } = auth();
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
