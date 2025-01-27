@@ -20,7 +20,7 @@ export const Hero = () => {
   return (
     <motion.section
       ref={sectionRef}
-      className="flex md:h-[800px] justify-center items-center h-[492px] overflow-hidden relative [mask-image:linear-gradient(to_top,transparent,black_10%_90%,transparent)]"
+      className="flex justify-center items-center min-h-screen overflow-hidden relative [mask-image:linear-gradient(to_top,transparent,black_10%_90%,transparent)]"
       style={{ backgroundImage: `url(${starsBg.src})`, backgroundPositionY }}
       animate={{ backgroundPositionX: starsBg.width }}
       transition={{ duration: 120, ease: "linear", repeat: Infinity }}

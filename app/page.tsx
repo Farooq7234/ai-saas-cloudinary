@@ -6,7 +6,7 @@ import { Features } from "@/components/Features";
 
 function Page() {
   return (
-    <main>
+    <main className="min-h-screen">
       <Header />
       <Hero />
       <LogoTicker />
