@@ -20,7 +20,7 @@ export const Hero = () => {
   return (
     <motion.section
       ref={sectionRef}
-      className="flex md:h-[800px] items-center h-[492px] overflow-hidden relative [mask-image:linear-gradient(to_top,transparent,black_10%_90%,transparent)]"
+      className="flex md:h-[800px] justify-center items-center h-[492px] overflow-hidden relative [mask-image:linear-gradient(to_top,transparent,black_10%_90%,transparent)]"
       style={{ backgroundImage: `url(${starsBg.src})`, backgroundPositionY }}
       animate={{ backgroundPositionX: starsBg.width }}
       transition={{ duration: 120, ease: "linear", repeat: Infinity }}
@@ -63,12 +63,11 @@ export const Hero = () => {
       </motion.div>
       {/* End Ring 3 */}
       <div className="container relative mt-16">
-        <h1 className="text-8xl md:text-[168px] font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text text-center">
-          AI SAAS
+        <h1 className="text-8xl font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text text-center">
+          Quality Keeper
         </h1>
         <p className="text-lg md:text-xl max-w-xl mx-auto text-white/70 mt-5 text-center">
-          Elevate your site's visibility effortlessly with AI, where smart
-          technology meets user-friendly SEO tools
+          Store and Compress Your Files with Ease
         </p>
         <div className="flex justify-center mt-5">
           <Button>Upload Files</Button>
