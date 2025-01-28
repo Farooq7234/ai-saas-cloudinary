@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import starsBg from "@/assets/stars.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 export const Hero = () => {
   const sectionRef = useRef(null);
@@ -70,7 +71,9 @@ export const Hero = () => {
           Store and Compress Your Files with Ease
         </p>
         <div className="flex justify-center mt-5">
-          <Button>Upload Files</Button>
+          <Link href="/sign-in" passHref>
+            <Button>Upload Files</Button>
+          </Link>
         </div>
       </div>
     </motion.section>
