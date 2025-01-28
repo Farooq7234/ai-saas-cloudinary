@@ -2,7 +2,7 @@ import Logo from "@/assets/logo.svg";
 
 export const Footer = () => {
   return (
-    <footer className="py-5 border-t border-white/15 flex justify-around items-center">
+    <footer className="py-5 border-t border-white/15 flex justify-around items-center px-4">
       <div className="container">
         <div className="flex flex-col lg:flex-row lg:items-center gap-8">
           <div className="flex gap-2 items-center lg:flex-1">
