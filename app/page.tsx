@@ -8,7 +8,7 @@ import { Hero } from "@/components/hero";
 
 function Page() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="bg-black">
       <Header />
       <Hero />
       <LogoTicker />
