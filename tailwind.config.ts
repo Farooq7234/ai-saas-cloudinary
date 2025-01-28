@@ -19,39 +19,41 @@ function addVariablesForColors({ addBase, theme }: any) {
 }
 
 const config: Config = {
-    darkMode: ["class"],
-    content: [
+  darkMode: ["class"],
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
-  		animation: {
-  			spotlight: 'spotlight 2s ease .75s 1 forwards',
-  			orbit: 'orbit calc(var(--duration)*1s) linear infinite'
-  		},
-  		keyframes: {
-  			spotlight: {
-  				'0%': {
-  					opacity: 0,
-  					transform: 'translate(-72%, -62%) scale(0.5)'
-  				},
-  				'100%': {
-  					opacity: 1,
-  					transform: 'translate(-50%,-40%) scale(1)'
-  				}
-  			},
-  			orbit: {
-  				'0%': {
-  					transform: 'rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg))'
-  				},
-  				'100%': {
-  					transform: 'rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg))'
-  				}
-  			}
-  		}
-  	}
+    extend: {
+      animation: {
+        spotlight: "spotlight 2s ease .75s 1 forwards",
+        orbit: "orbit calc(var(--duration)*1s) linear infinite",
+      },
+      keyframes: {
+        spotlight: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
+        orbit: {
+          "0%": {
+            transform:
+              "rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg))",
+          },
+          "100%": {
+            transform:
+              "rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg))",
+          },
+        },
+      },
+    },
   },
   plugins: [
     addVariablesForColors,
