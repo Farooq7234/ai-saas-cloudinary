@@ -4,7 +4,7 @@ import { LogoTicker } from "@/components/LogoTicker";
 import { Features } from "@/components/Features";
 import { CallToAction } from "@/components/CallToAction";
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/hero";
 
 function Page() {
   return (
