@@ -45,9 +45,9 @@ export function Features({ className }: { className?: string }) {
   const div7Ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="py-10 md:py-16">
+    <section className="py-0 md:py-16 px-4">
       <div className="container">
-        <h2 className="text-5xl md:text-6xl font-medium text-center tracking-tighter">
+        <h2 className="text-4xl md:text-6xl font-medium text-center tracking-tighter">
           Elevate Your Media Optimization Efforts
         </h2>
         <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto tracking-tight text-center mt-5">
@@ -63,7 +63,7 @@ export function Features({ className }: { className?: string }) {
         )}
         ref={containerRef}
       >
-        <div className="flex size-full flex-row items-stretch justify-between gap-10 p-10 max-w-lg">
+        <div className="flex size-full flex-row items-stretch justify-between gap-10 px-10 max-w-lg">
           <div className="flex flex-col justify-center gap-2">
             <Circle ref={div1Ref}>
               <Icons.fileText />
