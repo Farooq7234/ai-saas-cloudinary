@@ -1,4 +1,3 @@
-import { SignedOut } from "@clerk/nextjs";
 import LogoIcon from "@/assets/logo.svg";
 import Button from "@/components/Button";
 import Link from "next/link";
@@ -12,11 +11,9 @@ export const Header = () => {
             <LogoIcon className="h-8 w-8" />
           </div>
           <div>
-            <SignedOut>
-              <Link href="/sign-in" passHref>
-                <Button>Sign in</Button>
-              </Link>
-            </SignedOut>
+            <Link href="/sign-in" passHref>
+              <Button>Sign in</Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@ import {
   Text,
   Video,
 } from "lucide-react";
+import LogoIcon from "@/assets/logo.svg";
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -83,7 +84,7 @@ export function Features({ className }: { className?: string }) {
           </div>
           <div className="flex flex-col justify-center">
             <Circle ref={div6Ref} className="size-16">
-              <Icons.settings />
+              <LogoIcon className="h-8 w-8 text-black" />
             </Circle>
           </div>
           <div className="flex flex-col justify-center">
@@ -130,7 +131,7 @@ export function Features({ className }: { className?: string }) {
 
 const Icons = {
   fileText: () => <FileText className="w-10 h-10 text-black" />,
-  settings: () => <Settings className="w-10 h-10 text-black" />,
+  settings: () => <LogoIcon className="h-8 w-8" />,
 
   video: () => <Video className="w-10 h-10 text-black" />,
   music: () => <Music className="w-10 h-10 text-black" />,
