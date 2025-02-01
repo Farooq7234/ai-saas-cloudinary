@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import realtiveTime from "dayjs/plugin/relativeTime";
 import { filesize } from "filesize";
 import { Video } from "@/types";
-import Image from "next/image";
+// import Image from "next/image";
 
 dayjs.extend(realtiveTime);
 
@@ -72,7 +72,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
 
   return (
     <div
-      className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300"
+      className="card bg-base-100 shadow-xl rounded-md transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -93,10 +93,10 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             />
           )
         ) : (
-          <Image
+          <img
             src={getThumbnailUrl(video.publicId)}
             alt={video.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-tl-md rounded-tr-md"
           />
         )}
         <div className="absolute bottom-2 right-2 bg-base-100 bg-opacity-70 px-2 py-1 rounded-lg text-sm flex items-center">

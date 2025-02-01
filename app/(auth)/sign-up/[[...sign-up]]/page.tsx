@@ -77,8 +77,8 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen dark:bg-black bg-white ">
-      <Card className="w-full max-w-md  dark:bg-white dark:text-black">
+    <div className="flex items-center justify-center min-h-screen bg-white ">
+      <Card className="w-full max-w-md  bg-white text-black shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
             Sign Up for Quality Keeper
@@ -125,10 +125,7 @@ export default function SignUp() {
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
-              <Button
-                type="submit"
-                className="w-full dark:bg-black dark:text-white"
-              >
+              <Button type="submit" className="w-full bg-black text-white">
                 Sign Up
               </Button>
             </form>

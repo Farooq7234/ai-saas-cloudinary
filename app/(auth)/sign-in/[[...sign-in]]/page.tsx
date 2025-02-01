@@ -54,8 +54,8 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen dark:bg-black ">
-      <Card className="w-full max-w-md dark:bg-white dark:text-black">
+    <div className="flex items-center justify-center min-h-screen ">
+      <Card className="w-full max-w-md bg-white text-black">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
             Sign In to Quality Keeper
@@ -101,10 +101,7 @@ export default function SignIn() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button
-              type="submit"
-              className="w-full dark:bg-black  dark:text-white"
-            >
+            <Button type="submit" className="w-full bg-black  text-black">
               Sign In
             </Button>
           </form>
