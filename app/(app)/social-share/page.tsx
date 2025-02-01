@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 const socialFormats = {
   "Instagram Square (1:1)": { width: 1080, height: 1080, aspectRatio: "1:1" },
@@ -36,6 +37,7 @@ export default function SocialShare() {
   const [isUploading, setIsUploading] = useState(false);
   const [isTransforming, setIsTransforming] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (uploadedImage) {
@@ -58,7 +60,13 @@ export default function SocialShare() {
         body: formData,
       });
 
-      if (!response.ok) throw new Error("Failed to upload image");
+      if (!response.ok) {
+        toast({
+          title: "Failed to upload video",
+          variant: "destructive",
+        });
+        throw new Error("Failed to upload image");
+      }
 
       const data = await response.json();
       setUploadedImage(data.publicId);

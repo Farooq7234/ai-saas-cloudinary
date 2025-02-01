@@ -101,7 +101,7 @@ export default function SignIn() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button type="submit" className="w-full bg-black  text-black">
+            <Button type="submit" className="w-full bg-black  text-white">
               Sign In
             </Button>
           </form>

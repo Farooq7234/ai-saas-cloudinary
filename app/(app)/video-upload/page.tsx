@@ -10,13 +10,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 function VideoUpload() {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-
+  const { toast } = useToast();
   const router = useRouter();
 
   // Maximum file size of 70 MB
@@ -39,11 +40,18 @@ function VideoUpload() {
     formData.append("originalSize", file.size.toString());
 
     try {
-      await axios.post("/api/video-upload", formData);
+      const response = await axios.post("/api/video-upload", formData);
+      toast({
+        title: response.data,
+        variant: "destructive",
+      });
       router.push("/");
     } catch (error) {
       console.error(error);
-      // Add notification logic here if needed
+      toast({
+        title: "Failed to upload video",
+        variant: "destructive",
+      });
     } finally {
       setIsUploading(false);
     }
