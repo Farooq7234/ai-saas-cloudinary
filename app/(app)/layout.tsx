@@ -137,7 +137,7 @@ export default function AppLayout({
       <div className="flex flex-col flex-1">
         {/* Navbar */}
         <header className="w-full bg-background border-b py-1">
-          <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
+          <div className="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
             <div className="flex items-center space-x-4">
               {/* Mobile menu trigger */}
               <Button
