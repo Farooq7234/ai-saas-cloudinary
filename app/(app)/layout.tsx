@@ -95,7 +95,7 @@ export default function AppLayout({
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex lg:flex-col w-64  border-r">
         <div className="flex items-center justify-center py-4 border-b">
-          <ImageIcon className="w-10 h-10 text-primary" />
+          <ImageIcon className="w-10 h-10 text-violet-800" />
         </div>
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
@@ -145,7 +145,7 @@ export default function AppLayout({
                 className="lg:hidden"
                 onClick={() => setSidebarOpen(true)}
               >
-                <MenuIcon className="w-6 h-6" />
+                <MenuIcon className="w-10 h-10 " />
               </Button>
               <Link href="/" onClick={handleLogoClick}>
                 <span className="text-base sm:text-2xl font-bold cursor-pointer">
@@ -168,7 +168,7 @@ export default function AppLayout({
                     </AvatarFallback>
                   </Avatar>
                   <span className="text-sm truncate max-w-xs">
-                    {user.username || user.emailAddresses[0].emailAddress}
+                    {user.firstName || user.emailAddresses[0].emailAddress}
                   </span>
                   <Button variant="ghost" onClick={handleSignOut}>
                     <LogOutIcon className="w-6 h-6" />

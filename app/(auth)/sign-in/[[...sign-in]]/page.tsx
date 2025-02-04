@@ -23,6 +23,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(false);
   const router = useRouter();
 
   if (!isLoaded) {
@@ -36,6 +37,7 @@ export default function SignIn() {
     }
 
     try {
+      setIsSignIn(true);
       const result = await signIn.create({
         identifier: emailAddress,
         password,
@@ -50,12 +52,14 @@ export default function SignIn() {
     } catch (err: any) {
       console.error("error", err.errors[0].message);
       setError(err.errors[0].message);
+    } finally {
+      setIsSignIn(false);
     }
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <Card className="w-full max-w-md bg-white text-black">
+      <Card className="w-[350px] sm:w-full max-w-md bg-white text-black">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
             Sign In to Quality Keeper
@@ -97,21 +101,25 @@ export default function SignIn() {
               </div>
             </div>
             {error && (
-              <Alert variant="destructive">
+              <Alert variant="destructive" className="text-red-500">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button type="submit" className="w-full bg-black  text-white">
+            <Button
+              type="submit"
+              disabled={isSignIn}
+              className="w-full bg-black  text-white"
+            >
               Sign In
             </Button>
           </form>
         </CardContent>
         <CardFooter className="justify-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
               href="/sign-up"
-              className="font-medium text-primary hover:underline"
+              className="font-medium text-primary hover:underline text-violet-800"
             >
               Sign up
             </Link>

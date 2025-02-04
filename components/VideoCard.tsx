@@ -72,7 +72,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
 
   return (
     <div
-      className="card bg-base-100 shadow-xl rounded-md transition-all duration-300"
+      className="w-[350px] sm:w-[300px] bg-base-100 shadow-xl rounded-md "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -88,7 +88,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
               autoPlay
               muted
               loop
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-tl-md rounded-tr-md"
               onError={handlePreviewError}
             />
           )
@@ -117,21 +117,30 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             <FileUp size={18} className="mr-2 text-primary" />
             <div>
               <div className="font-semibold">Original</div>
-              <div>{formatSize(Number(video.originalSize))}</div>
+              <div className="text-red-500 font-bold">
+                {formatSize(Number(video.originalSize))}
+              </div>
             </div>
           </div>
           <div className="flex items-center">
             <FileDown size={18} className="mr-2 text-secondary" />
             <div>
               <div className="font-semibold">Compressed</div>
-              <div>{formatSize(Number(video.compressedSize))}</div>
+              <div
+                className="text-green-500 font-bold
+              "
+              >
+                {formatSize(Number(video.compressedSize))}
+              </div>
             </div>
           </div>
         </div>
         <div className="flex justify-between items-center mt-4">
           <div className="text-sm font-semibold">
             Compression:{" "}
-            <span className="text-accent">{compressionPercentage}%</span>
+            <span className="text-accent text-green-500 font-bold">
+              {compressionPercentage}%
+            </span>
           </div>
           <button
             className="btn btn-primary btn-sm"
@@ -139,7 +148,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
               onDownload(getFullVideoUrl(video.publicId), video.title)
             }
           >
-            <Download size={16} />
+            <Download size={25} />
           </button>
         </div>
       </div>

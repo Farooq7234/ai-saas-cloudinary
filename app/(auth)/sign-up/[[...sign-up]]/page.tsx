@@ -20,11 +20,15 @@ import { Eye, EyeOff } from "lucide-react";
 export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [emailAddress, setEmailAddress] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isVerify, setIsVerify] = useState(false);
   const router = useRouter();
 
   if (!isLoaded) {
@@ -38,7 +42,10 @@ export default function SignUp() {
     }
 
     try {
+      setIsSignUp(true);
       await signUp.create({
+        firstName,
+        lastName,
         emailAddress,
         password,
       });
@@ -49,6 +56,8 @@ export default function SignUp() {
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
       setError(err.errors[0].message);
+    } finally {
+      setIsSignUp(false);
     }
   }
 
@@ -59,6 +68,7 @@ export default function SignUp() {
     }
 
     try {
+      setIsVerify(true);
       const completeSignUp = await signUp.attemptEmailAddressVerification({
         code,
       });
@@ -73,12 +83,14 @@ export default function SignUp() {
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
       setError(err.errors[0].message);
+    } finally {
+      setIsVerify(false);
     }
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white ">
-      <Card className="w-full max-w-md  bg-white text-black shadow-lg">
+      <Card className="w-[350px]  sm:w-full max-w-md  bg-white text-black shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
             Sign Up for Quality Keeper
@@ -87,6 +99,26 @@ export default function SignUp() {
         <CardContent>
           {!pendingVerification ? (
             <form onSubmit={submit} className="space-y-4 ">
+              <div className="space-y-2">
+                <Label htmlFor="name">First Name</Label>
+                <Input
+                  type="name"
+                  id="name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="name">Last Name</Label>
+                <Input
+                  type="name"
+                  id="name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -121,11 +153,15 @@ export default function SignUp() {
                 </div>
               </div>
               {error && (
-                <Alert variant="destructive">
+                <Alert variant="destructive" className="text-red-500">
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
-              <Button type="submit" className="w-full bg-black text-white">
+              <Button
+                type="submit"
+                disabled={isSignUp}
+                className="w-full bg-black text-white"
+              >
                 Sign Up
               </Button>
             </form>
@@ -148,6 +184,7 @@ export default function SignUp() {
               )}
               <Button
                 type="submit"
+                disabled={isVerify}
                 className="w-full dark:bg-black dark:text-white"
               >
                 Verify Email

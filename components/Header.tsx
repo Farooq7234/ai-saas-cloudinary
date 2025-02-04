@@ -8,7 +8,7 @@ export const Header = () => {
       <div className="container">
         <div className="flex justify-between items-center md:border border-white/15 p-2.5  rounded-xl max-w-2xl mx-auto px-10">
           <div className="border border-white/15 flex justify-center items-center h-10 w-10">
-            <LogoIcon className="h-8 w-8" />
+            <LogoIcon key={LogoIcon} className="h-8 w-8" />
           </div>
           <div>
             <Link href="/sign-in" passHref>

@@ -37,6 +37,7 @@ export default function SocialShare() {
   const [isUploading, setIsUploading] = useState(false);
   const [isTransforming, setIsTransforming] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -80,6 +81,7 @@ export default function SocialShare() {
 
   const handleDownload = () => {
     if (!imageRef.current) return;
+    setIsDownloading(true);
 
     fetch(imageRef.current.src)
       .then((response) => response.blob())
@@ -94,6 +96,7 @@ export default function SocialShare() {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
+        setIsDownloading(false);
       });
   };
 
@@ -114,13 +117,13 @@ export default function SocialShare() {
               id="file-upload"
               type="file"
               onChange={handleFileUpload}
-              className="mt-2"
+              className="mt-2 "
             />
           </div>
 
           {isUploading && (
             <div className="mt-4">
-              <Progress value={50} className="w-full h-2 bg-gray-200 rounded" />
+              <Progress value={50} className="w-full h-2 bg-black rounded" />
             </div>
           )}
 
@@ -178,7 +181,9 @@ export default function SocialShare() {
                   variant={"default"}
                   onClick={handleDownload}
                 >
-                  Download for {selectedFormat}
+                  {isDownloading
+                    ? `Downloading...`
+                    : `Download for ${selectedFormat}`}
                 </Button>
               </div>
             </>
