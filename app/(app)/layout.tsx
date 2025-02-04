@@ -138,17 +138,17 @@ export default function AppLayout({
         {/* Navbar */}
         <header className="w-full bg-background border-b py-1">
           <div className="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center ">
               {/* Mobile menu trigger */}
               <Button
                 variant="ghost"
                 className="lg:hidden"
                 onClick={() => setSidebarOpen(true)}
               >
-                <MenuIcon className="w-10 h-10 " />
+                <MenuIcon className="w-20 h-20" />
               </Button>
               <Link href="/" onClick={handleLogoClick}>
-                <span className="text-base sm:text-2xl font-bold cursor-pointer">
+                <span className="text-xl sm:text-2xl font-bold cursor-pointer">
                   Dashboard
                 </span>
               </Link>
