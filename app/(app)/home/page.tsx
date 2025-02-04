@@ -56,7 +56,7 @@ function Home() {
           No videos available
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
           {videos.map((video) => (
             <VideoCard
               key={video.id}
