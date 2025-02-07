@@ -60,7 +60,7 @@ export default function AppLayout({
                     <Link
                       href={item.href}
                       onClick={() => setSidebarOpen(false)}
-                      className={`flex items-center space-x-4 p-2 rounded-md transition-colors hover:bg-black hover:text-white ${
+                      className={`flex items-center space-x-4 p-2 rounded-md transition-colors   ${
                         pathname === item.href
                           ? "bg-primary text-primary-foreground"
                           : "hover:bg-muted"
@@ -80,7 +80,7 @@ export default function AppLayout({
                   <Button
                     variant="destructive"
                     onClick={handleSignOut}
-                    className="w-full  bg-red-500 text-white"
+                    className="w-full   text-white"
                   >
                     <LogOutIcon className="mr-2 w-5 h-5" />
                     Sign Out
@@ -103,7 +103,7 @@ export default function AppLayout({
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`flex items-center space-x-4 p-2 rounded-md transition-colors hover:bg-black hover:text-white ${
+                  className={`flex items-center space-x-4 p-2 rounded-md transition-colors   ${
                     pathname === item.href
                       ? "bg-primary text-primary-foreground"
                       : "hover:bg-muted"
@@ -123,7 +123,7 @@ export default function AppLayout({
               <Button
                 variant="destructive"
                 onClick={handleSignOut}
-                className="w-full bg-red-500 text-white"
+                className="w-full  text-white"
               >
                 <LogOutIcon className="mr-2 w-5 h-5" />
                 Sign Out
@@ -137,7 +137,7 @@ export default function AppLayout({
       <div className="flex flex-col flex-1">
         {/* Navbar */}
         <header className="w-full bg-background border-b py-1">
-          <div className="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
+          <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
             <div className="flex items-center ">
               {/* Mobile menu trigger */}
               <Button

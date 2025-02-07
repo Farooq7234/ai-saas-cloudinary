@@ -59,17 +59,15 @@ function VideoUpload() {
 
   return (
     <div className="container mx-auto p-4">
-      <Card className="max-w-xl mx-auto bg-white shadow-md">
+      <Card className="max-w-xl mx-auto shadow-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-black">
-            Upload Video
-          </CardTitle>
+          <CardTitle className="text-2xl font-bold ">Upload Video</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Title Field */}
             <div>
-              <Label htmlFor="title" className="mb-1 text-black">
+              <Label htmlFor="title" className="mb-">
                 Title
               </Label>
               <Input
@@ -79,7 +77,6 @@ function VideoUpload() {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter video title"
                 required
-                className="bg-white border border-gray-300 text-black"
               />
             </div>
 
@@ -93,13 +90,12 @@ function VideoUpload() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Enter video description"
-                className="bg-white border border-gray-300 text-black"
               />
             </div>
 
             {/* File Upload Field */}
             <div>
-              <Label htmlFor="file" className="mb-1 text-black">
+              <Label htmlFor="file" className="mb-1">
                 Video File
               </Label>
               <Input
@@ -108,16 +104,11 @@ function VideoUpload() {
                 accept="video/*"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
                 required
-                className="bg-white border border-gray-300 text-black"
               />
             </div>
 
             {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={isUploading}
-              className="w-full bg-black text-white hover:bg-black"
-            >
+            <Button type="submit" disabled={isUploading} className="w-full">
               {isUploading ? "Uploading..." : "Upload Video"}
             </Button>
           </form>

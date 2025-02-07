@@ -39,11 +39,16 @@ export default function SocialShare() {
   const imageRef = useRef<HTMLImageElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
+  const [progress, setProgress] = useState(13);
 
   useEffect(() => {
+    const timer = setTimeout(() => setProgress(96), 500);
+
     if (uploadedImage) {
       setIsTransforming(true);
     }
+
+    return () => clearTimeout(timer);
   }, [selectedFormat, uploadedImage]);
 
   const handleFileUpload = async (
@@ -123,7 +128,7 @@ export default function SocialShare() {
 
           {isUploading && (
             <div className="mt-4">
-              <Progress value={50} className="w-full h-2 bg-black rounded" />
+              <Progress value={progress} className="w-full animate-pulse" />
             </div>
           )}
 
@@ -139,10 +144,10 @@ export default function SocialShare() {
                     setSelectedFormat(value as SocialFormat)
                   }
                 >
-                  <SelectTrigger className="w-full mt-2 bg-white text-black border border-gray-300">
+                  <SelectTrigger className="w-full mt-2">
                     <SelectValue placeholder="Select a format" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white text-black">
+                  <SelectContent>
                     {Object.keys(socialFormats).map((format) => (
                       <SelectItem key={format} value={format}>
                         {format}
@@ -156,7 +161,7 @@ export default function SocialShare() {
                 <h3 className="text-lg font-semibold mb-2">Preview:</h3>
                 <div className="flex justify-center">
                   {isTransforming && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
+                    <div className="absolute inset-0 flex items-center justify-center bg-opacity-50 z-10">
                       <Loader2 className="animate-spin h-8 w-8" />
                     </div>
                   )}
@@ -176,11 +181,7 @@ export default function SocialShare() {
               </div>
 
               <div className="mt-6 flex justify-end ">
-                <Button
-                  className="bg-black text-white"
-                  variant={"default"}
-                  onClick={handleDownload}
-                >
+                <Button variant={"default"} onClick={handleDownload}>
                   {isDownloading
                     ? `Downloading...`
                     : `Download for ${selectedFormat}`}

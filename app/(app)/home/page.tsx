@@ -3,10 +3,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import VideoCard from "@/components/VideoCard";
 import { Video } from "@/types";
+import { useUser } from "@clerk/nextjs";
 function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { isSignedIn, user, isLoaded } = useUser();
+  console.log(isSignedIn);
+  console.log(user);
+  console.log(isLoaded);
 
   const fetchVideos = useCallback(async () => {
     try {

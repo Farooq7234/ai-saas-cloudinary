@@ -46,8 +46,8 @@ export function Features({ className }: { className?: string }) {
   const div7Ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="py-0 md:py-16 px-4">
-      <div className="container">
+    <section className="py-0 md:py-16 px-4 ">
+      <div className="container mx-auto">
         <h2 className="text-4xl md:text-6xl font-medium text-center tracking-tighter">
           Elevate Your Media Optimization Efforts
         </h2>

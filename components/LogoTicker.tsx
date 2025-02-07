@@ -9,8 +9,8 @@ import Image from "next/image";
 
 export const LogoTicker = () => {
   return (
-    <section className="py-20 md:py-24 px-10">
-      <div className="container">
+    <section className="py-20 md:py-24 px-10 ">
+      <div className="container mx-auto">
         <div className="flex  items-center gap-5">
           <div className="flex-1 md:flex-none">
             <h2>Trusted by top innovative teams</h2>
