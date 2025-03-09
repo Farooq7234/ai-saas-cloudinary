@@ -25,14 +25,9 @@ export const LogoTicker = () => {
               {[
                 acmeLogo,
                 celestialLogo,
-                quantumLogo,
                 pulseLogo,
                 echoLogo,
-                acmeLogo,
-                celestialLogo,
                 quantumLogo,
-                pulseLogo,
-                echoLogo,
               ].map((logo) => (
                 <Image
                   width={100}

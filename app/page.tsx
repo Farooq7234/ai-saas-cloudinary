@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import  Header  from "@/components/Header";
 import { Testimonials } from "@/components/Testimonials";
 import { LogoTicker } from "@/components/LogoTicker";
 import { Features } from "@/components/Features";
