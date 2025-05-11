@@ -5,13 +5,14 @@ import { Features } from "@/components/Features";
 import { CallToAction } from "@/components/CallToAction";
 import { Footer } from "@/components/Footer";
 import { WorldMapDemo } from "@/components/WorldMap";
-// import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/hero";
+
 
 function Page() {
   return (
     <main className="bg-black text-white">
       <Header />
-      {/* <Hero/> */}
+      <Hero/>
       <LogoTicker />
       <Features />
       <Testimonials />
