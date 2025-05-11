@@ -5,7 +5,7 @@ import { Features } from "@/components/Features";
 import { CallToAction } from "@/components/CallToAction";
 import { Footer } from "@/components/Footer";
 import { WorldMapDemo } from "@/components/WorldMap";
-import { Hero } from "@/components/hero";
+import { Hero } from "@/components/HeroSection";
 
 
 function Page() {
