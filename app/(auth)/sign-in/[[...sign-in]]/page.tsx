@@ -16,6 +16,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff } from "lucide-react";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 export default function SignIn() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -58,7 +59,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+   <> <div className="flex items-center justify-center min-h-screen ">
       <Card className="w-[350px] sm:w-full max-w-md bg-white text-black">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
@@ -66,6 +67,7 @@ export default function SignIn() {
           </CardTitle>
         </CardHeader>
         <CardContent>
+
           <form onSubmit={submit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -73,6 +75,7 @@ export default function SignIn() {
                 type="email"
                 id="email"
                 value={emailAddress}
+                placeholder="Enter your email"
                 onChange={(e) => setEmailAddress(e.target.value)}
                 required
               />
@@ -84,6 +87,7 @@ export default function SignIn() {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
+                  placeholder="Enter your password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -112,6 +116,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            
           </form>
         </CardContent>
         <CardFooter className="justify-center">
@@ -127,5 +132,6 @@ export default function SignIn() {
         </CardFooter>
       </Card>
     </div>
+      </>
   );
 }

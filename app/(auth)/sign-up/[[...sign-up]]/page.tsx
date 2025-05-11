@@ -105,6 +105,7 @@ export default function SignUp() {
                   type="name"
                   id="name"
                   value={firstName}
+                  placeholder="Enter your first name"
                   onChange={(e) => setFirstName(e.target.value)}
                   required
                 />
@@ -115,6 +116,7 @@ export default function SignUp() {
                   type="name"
                   id="name"
                   value={lastName}
+                  placeholder="Enter your last name"
                   onChange={(e) => setLastName(e.target.value)}
                   required
                 />
@@ -125,6 +127,7 @@ export default function SignUp() {
                   type="email"
                   id="email"
                   value={emailAddress}
+                  placeholder="Enter your email address"
                   onChange={(e) => setEmailAddress(e.target.value)}
                   required
                 />
@@ -136,6 +139,7 @@ export default function SignUp() {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     value={password}
+                    placeholder="Enter your password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />

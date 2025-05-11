@@ -12,7 +12,7 @@ export default function Header() {
       <div className="container">
         <div className="flex justify-between items-center md:border border-white/15 p-2.5  rounded-xl max-w-2xl mx-auto px-10">
           <div className="border border-white/15 flex justify-center items-center h-10 w-10">
-          <Image src={LogoIcon} alt="Logo" width={32} height={32} />
+          <Image src={LogoIcon} className="bg-gray-50" alt="Logo" width={32} height={32} />
 
           </div>
           <div>
