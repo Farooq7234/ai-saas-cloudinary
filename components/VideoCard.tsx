@@ -99,9 +99,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             className="w-full h-full object-cover rounded-tl-md rounded-tr-md"
           />
         )}
-        <div className="absolute bottom-2 right-2 bg-base-100 bg-opacity-70 px-2 py-1 rounded-lg text-sm flex items-center">
-          <Clock size={16} className="mr-1" />
-          {formatDuration(video.duration)}
+        <div className="absolute bottom-2 right-2 bg-black bg-opacity-30 px-2 py-1 rounded-lg text-xs flex items-center">
+          <Clock size={16} className="mr-1 text-white" />
+          <p className="text-white bg-transparent">{formatDuration(video.duration)}</p>
         </div>
       </figure>
       <div className="card-body p-4">
@@ -123,7 +123,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             </div>
           </div>
           <div className="flex items-center">
-            <FileDown size={18} className="mr-2 text-secondary" />
+            <FileDown size={18} className="mr-2 text-primary " />
             <div>
               <div className="font-semibold">Compressed</div>
               <div
