@@ -42,8 +42,8 @@ function VideoUpload() {
     try {
       const response = await axios.post("/api/video-upload", formData);
       toast({
-        title: response.data,
-        variant: "destructive",
+        title: response.data.message || "Video uploaded successfully",
+        variant: "default",
       });
       router.push("/");
     } catch (error) {
