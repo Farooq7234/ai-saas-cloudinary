@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { getAuth } from "@clerk/nextjs/server"; // Adjust import if needed
+import { getAuth } from "@clerk/nextjs/server";
+
 
 const prisma = new PrismaClient();
 
@@ -8,18 +9,20 @@ export async function GET(request: NextRequest) {
   try {
     const { userId } = getAuth(request);
     if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Missing Clerk user ID" },
+        { status: 400 }
+      );
     }
 
-    const videos = await prisma.video.findMany({
+    const pdfs = await prisma.pdf.findMany({
       where: { UserId: userId },
       orderBy: { createdAt: "desc" },
     });
-
-    return NextResponse.json(videos);
+    return NextResponse.json(pdfs);
   } catch (error) {
     return NextResponse.json(
-      { error: "Error fetching videos" },
+      { error: "Error fetching PDFs" },
       { status: 500 }
     );
   } finally {

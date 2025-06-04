@@ -15,7 +15,6 @@ cloudinary.config({
 interface CloudinaryUploadResult {
   public_id: string;
   bytes: number;
-  duration?: number;
   [key: string]: any;
 }
 
@@ -55,9 +54,9 @@ export async function POST(request: NextRequest) {
       (resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
           {
-            resource_type: "video",
-            folder: "video-uploads",
-            transformation: [{ quality: "auto", fetch_format: "mp4" }],
+            resource_type: "auto",
+            folder: "pdf-uploads",
+            transformation: [{ quality: "auto", fetch_format: "pdf" }],
           },
           (error, result) => {
             if (error) reject(error);
@@ -67,7 +66,7 @@ export async function POST(request: NextRequest) {
         uploadStream.end(buffer);
       }
     );
-    const video = await prisma.video.create({
+    const pdf = await prisma.pdf.create({
       data: {
         UserId: userId,
         title,
@@ -75,13 +74,12 @@ export async function POST(request: NextRequest) {
         publicId: result.public_id,
         originalSize: originalSize,
         compressedSize: String(result.bytes),
-        duration: result.duration || 0,
       },
     });
-    return NextResponse.json(video);
+    return NextResponse.json(pdf);
   } catch (error) {
-    console.log("Upload video failed", error);
-    return NextResponse.json({ error: "Upload video failed" }, { status: 500 });
+    console.log("Upload PDF failed", error);
+    return NextResponse.json({ error: "Upload PDF failed" }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }

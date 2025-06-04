@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
-function VideoUpload() {
+function PdfUpload() {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -40,17 +40,18 @@ function VideoUpload() {
     formData.append("description", description);
     formData.append("originalSize", file.size.toString());
 
+
     try {
-      const response = await axios.post("/api/video-upload", formData);
+      const response = await axios.post("/api/pdf-upload", formData);
       toast({
-        title:  "Video uploaded successfully",
+        title: response.data.message || "PDF uploaded successfully",
         variant: "default",
       });
       router.push("/");
     } catch (error) {
       console.error(error);
       toast({
-        title: "Failed to upload video",
+        title: "Failed to upload PDF",
         variant: "destructive",
       });
     } finally {
@@ -58,11 +59,12 @@ function VideoUpload() {
     }
   };
 
+
   return (
     <div className="container mx-auto p-4">
       <Card className="max-w-xl mx-auto shadow-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold ">Upload Video</CardTitle>
+          <CardTitle className="text-2xl font-bold ">Upload PDF</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -76,33 +78,33 @@ function VideoUpload() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter video title"
+                placeholder="Enter PDF title"
                 required
               />
             </div>
 
             {/* Description Field */}
             <div>
-              <Label htmlFor="description" className="mb-1">
+              <Label htmlFor="description" className="mb-1 ">
                 Description
               </Label>
               <Textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Enter video description"
+                placeholder="Enter PDF description"
               />
             </div>
 
             {/* File Upload Field */}
             <div>
               <Label htmlFor="file" className="mb-1">
-                Video File
+                PDF File
               </Label>
               <Input
                 id="file"
                 type="file"
-                accept="video/*"
+                accept="application/pdf"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
                 required
               />
@@ -110,7 +112,7 @@ function VideoUpload() {
 
             {/* Submit Button */}
             <Button type="submit" disabled={isUploading} className="w-full">
-              {isUploading ? <>Uploading Video <Loader2 className="animate-spin mx-2"/></> : "Upload Video"}
+              {isUploading ? <>Uploading PDF <Loader2 className="animate-spin mx-2"/></> : "Upload PDF"}
             </Button>
           </form>
         </CardContent>
@@ -119,4 +121,4 @@ function VideoUpload() {
   );
 }
 
-export default VideoUpload;
+export default PdfUpload;

@@ -72,7 +72,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
 
   return (
     <div
-      className="w-[350px] sm:w-[300px] bg-base-100 shadow-xl rounded-md "
+      className="w-[350px] sm:w-[300px] bg-base-100 shadow-xl rounded-md dark:border dark:border-gray-700 transition-transform transform hover:scale-105 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

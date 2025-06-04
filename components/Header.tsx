@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
-  {  console.log("LogoIcon:", LogoIcon);}
+
 
   return (
     <header className="py-4 border-b border-white/15 md:border-none sticky top-0 z-50 backdrop-blur  flex justify-center items-center">
