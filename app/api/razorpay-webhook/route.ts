@@ -1,16 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { PrismaClient } from "@prisma/client";
-import { auth } from "@clerk/nextjs/server";
-
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-  const { userId } = auth();
-  if (!userId) {
-    return NextResponse.json({ error: "Unauthorized" , message:"User is not authenticated for Razorpay webhook" }, { status: 401 });
-  }
   const secret = process.env.RAZORPAY_WEBHOOK_SECRET!;
   const body = await req.text();
   const signature = req.headers.get("x-razorpay-signature") || "";
@@ -27,9 +21,15 @@ export async function POST(req: NextRequest) {
   const event = JSON.parse(body);
 
   if (event.event === "payment.captured") {
-    const razorpayCustomerId = event.payload.payment.entity.customer_id;
+    const paymentEntity = event.payload.payment.entity;
 
-    // Optional: Store mapping of razorpayCustomerId to your User
+    // Use notes field or some mapping to find the user
+    const userId = paymentEntity.notes?.userId;
+
+    if (!userId) {
+      return NextResponse.json({ error: "Missing user ID in payment notes" }, { status: 400 });
+    }
+
     await prisma.user.update({
       where: { id: userId },
       data: { isPro: true },

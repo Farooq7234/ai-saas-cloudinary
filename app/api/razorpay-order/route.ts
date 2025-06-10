@@ -10,7 +10,7 @@ const razorpay = new Razorpay({
 
 export async function POST(req: NextRequest) {
   try {
-   // Check if Razorpay credentials are available
+    // Check if Razorpay credentials are available
     if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
       return NextResponse.json({ error: "Razorpay credentials not found" }, { status: 500 });
     }
@@ -22,6 +22,9 @@ export async function POST(req: NextRequest) {
       amount: amount * 100, // in paise
       currency: "INR",
       receipt: `receipt_order_${Date.now()}`,
+      notes: {
+        userId: body.userId,  // Send the user ID to later retrieve it from webhook
+      },
     });
 
     return NextResponse.json({ order });

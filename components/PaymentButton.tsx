@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 
 export default function PaymentButton() {
+
   const loadRazorpayScript = () =>
     new Promise((resolve) => {
       const script = document.createElement("script");
@@ -22,7 +23,8 @@ export default function PaymentButton() {
     const orderRes = await fetch("/api/razorpay-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 99 }), // ₹99
+     body: JSON.stringify({ amount: 99, userId: 'user_2yJ52llksMKT7kjrPbZdK5XcH93' }),
+
     });
 
     const { order } = await orderRes.json();
