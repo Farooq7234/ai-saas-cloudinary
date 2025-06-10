@@ -21,8 +21,6 @@ export async function POST(req: NextRequest) {
       receipt: `receipt_order_${Date.now()}`,
     });
 
-    prisma.user.update({})
-
 
 
     return NextResponse.json({ order });
