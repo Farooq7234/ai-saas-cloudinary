@@ -177,7 +177,7 @@ export default function PaymentButton() {
 
   return (
     <>
-  {    isPro ? (<div className="flex items-center justify-center">
+  {    !isPro ? (<div className="flex items-center justify-center">
       <button
         onClick={handlePayment}
         disabled={loading}
