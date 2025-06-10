@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     if (userWithVideos && userWithVideos.videos.length >= 1) {
       return NextResponse.json(
-      { error: "Upload limit reached. You can only upload up to 6 videos." },
+      { error: "Upload limit reached. You can only upload up to 1 videos." },
       { status: 403 }
       );
     }
