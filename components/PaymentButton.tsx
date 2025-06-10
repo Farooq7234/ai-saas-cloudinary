@@ -3,14 +3,14 @@
 import { useUser } from '@clerk/nextjs'
 import { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
-import { useToast } from '@/hooks/use-toast'
+import {  useToast } from '@/hooks/use-toast'
 
 export default function PaymentButton() {
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
   const { toast } = useToast()
   const [isPro, setIsPro] = useState(false)
-  const [checkingStatus, setCheckingStatus] = useState(true)
+
 
   const fetchUserStatus = async () => {
     try {   
@@ -30,15 +30,12 @@ export default function PaymentButton() {
       setIsPro(data.isPro)
     } catch (error) {
       console.error("Error fetching user status:", error)
-      // Set to false on error so button shows (fail-safe)
-      setIsPro(false)
-    } finally {
-      setCheckingStatus(false)
+      return false
     }
   }
 
   useEffect(() => {
-    fetchUserStatus()
+  fetchUserStatus()
   }, [])
 
   const confettiTrigger = () => {
@@ -128,7 +125,6 @@ export default function PaymentButton() {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
-                userId: user?.id, // Add userId to verify-payment call
               }),
             })
             
@@ -138,8 +134,6 @@ export default function PaymentButton() {
                 variant: "default",
               })
               confettiTrigger()
-              // Update local state to hide button
-              setIsPro(true)
             } else {
               toast({
                 title: "Payment verification failed!",
@@ -160,8 +154,8 @@ export default function PaymentButton() {
           }
         },
         prefill: {
-          name: user?.fullName || "User",
-          email: user?.primaryEmailAddress?.emailAddress || "",
+          name: "Test User",
+          email: "test@example.com",
         },
         theme: {
           color: "#6366F1",
@@ -181,25 +175,9 @@ export default function PaymentButton() {
     }
   }
 
-  // Show loading while checking status
-  if (checkingStatus) {
-    return (
-      <div className="flex items-center justify-center">
-        <div className="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm">
-          Checking status...
-        </div>
-      </div>
-    )
-  }
-
-  // Don't show anything if user is already Pro
-  if (isPro) {
-    return null
-  }
-
-  // Show payment button only for non-Pro users
   return (
-    <div className="flex items-center justify-center">
+    <>
+  {    isPro ? (<div className="flex items-center justify-center">
       <button
         onClick={handlePayment}
         disabled={loading}
@@ -207,6 +185,7 @@ export default function PaymentButton() {
       >
         {loading ? "Processing..." : "Upgrade to Pro - ₹99"}
       </button>
-    </div>
+    </div>):('')}
+    </>
   )
 }
