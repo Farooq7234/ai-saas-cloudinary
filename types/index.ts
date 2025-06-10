@@ -23,6 +23,7 @@ export interface Pdf {
 }
 export interface User {
     id: string
+    email: string
     isPro: boolean
     razorpayId: string
     createdAt: Date

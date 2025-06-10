@@ -39,6 +39,7 @@
     "razorpay": "^2.9.6",
     "react": "^18",
     "react-dom": "^18",
+    "svix": "^1.67.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
