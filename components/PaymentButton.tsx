@@ -1,7 +1,7 @@
 'use client'
 
 import { useUser } from '@clerk/nextjs'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import confetti from 'canvas-confetti'
 import {  useToast } from '@/hooks/use-toast'
 
@@ -9,36 +9,9 @@ export default function PaymentButton() {
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
   const { toast } = useToast()
-  const [isPro, setIsPro] = useState(false)
 
-
-  const fetchUserStatus = async () => {
-    try {   
-      const response = await fetch("/api/user-status", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch user status')
-      }
-
-      const data = await response.json()
-      if (!data || typeof data.isPro !== 'boolean') {
-        throw new Error('Invalid response format')
-      }
-      setIsPro(data.isPro)
-    } catch (error) {
-      console.error("Error fetching user status:", error)
-      return false
-    }
-  }
-
-  useEffect(() => {
-  fetchUserStatus()
-  }, [])
-
-  const confettiTrigger = () => {
+  
+const confettiTrigger = () => {
     const end = Date.now() + 3 * 1000; // 3 seconds
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
  
@@ -176,16 +149,14 @@ export default function PaymentButton() {
   }
 
   return (
-    <>
-  {    !isPro ? (<div className="flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <button
         onClick={handlePayment}
         disabled={loading}
-        className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg text-sm transition-colors"
+        className="bg-violet-700 hover:bg-violet-800 disabled:bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg text-sm transition-colors"
       >
-        {loading ? "Processing..." : "Upgrade to Pro - ₹99"}
+        {loading ? "Processing..." : "Upgrade to Pro"}
       </button>
-    </div>):('')}
-    </>
+    </div>
   )
 }
