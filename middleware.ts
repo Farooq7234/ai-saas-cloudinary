@@ -6,9 +6,11 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up",
   "/",
   "/home",
-  "/api/clerk-webhook",
 ]);
-const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
+const isPublicApiRoute = createRouteMatcher([
+  "/api/videos",
+  "/api/clerk-webhook"
+]);
 
 export default clerkMiddleware((auth, req) => {
   const { userId } = auth();
