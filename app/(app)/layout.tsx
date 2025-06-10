@@ -38,29 +38,10 @@ export default function AppLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const [isPro, setIsPro] = useState(false); // State to manage Pro status, you can replace this with your own logic
   const { signOut } = useClerk();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
 
-  const fetchUserStatus = async () => {
-    try {
-      const response = await fetch("/api/user-status");
-      if (!response.ok) {
-        throw new Error("Failed to fetch user status");
-      }
-      const data = await response.json();
-      if (data.message === "User is a Pro member") {
-        setIsPro(true);
-      }
-    } catch (error) {
-      console.error("Error fetching user status:", error);
-      return null;
-    }
-  };
 
-  useEffect(() => {
-    fetchUserStatus();
-  }, []);
 
   const handleLogoClick = () => {
     router.push("/");
@@ -167,7 +148,7 @@ export default function AppLayout({
         {/* Main Content Area */}
         <div className="flex flex-col flex-1">
           {/* Navbar */}
-          <header className="w-full bg-background border-b py-1">
+      { isLoaded &&    <header className="w-full bg-background border-b py-1">
             <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
               <div className="flex items-center ">
                 {/* Mobile menu trigger */}
@@ -186,8 +167,6 @@ export default function AppLayout({
               </div>
               <div className="flex items-center space-x-4">
                 <ModeToggle />
-                {/* Payment Button */}
-                {!isPro && <PaymentButton />}
                 {/* User Avatar and Sign Out */}
                 {user && (
                   <>
@@ -212,7 +191,7 @@ export default function AppLayout({
                 )}
               </div>
             </div>
-          </header>
+          </header>}
 
           {/* Page Content */}
           <main className="flex-1 overflow-auto">

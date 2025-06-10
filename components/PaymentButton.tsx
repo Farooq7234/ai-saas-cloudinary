@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs'
 import { useState } from 'react'
 import confetti from 'canvas-confetti'
 import {  useToast } from '@/hooks/use-toast'
+import { RainbowButton } from './magicui/rainbow-button'
 
 export default function PaymentButton() {
   const [loading, setLoading] = useState(false)
@@ -150,13 +151,8 @@ const confettiTrigger = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <button
-        onClick={handlePayment}
-        disabled={loading}
-        className="bg-violet-700 hover:bg-violet-800 disabled:bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg text-sm transition-colors"
-      >
-        {loading ? "Processing..." : "Upgrade to Pro"}
-      </button>
+        <RainbowButton onClick={handlePayment}
+        disabled={loading}>{loading ? "Processing..." : "Upgrade to Pro"}</RainbowButton>
     </div>
   )
 }
