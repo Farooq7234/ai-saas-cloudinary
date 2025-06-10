@@ -51,7 +51,7 @@ function PdfUpload() {
     } catch (error) {
       console.error(error);
       toast({
-        title: "Failed to upload PDF",
+        title: (error as any)?.response?.data?.error || "Error Uploading PDF try Again",
         variant: "destructive",
       });
     } finally {

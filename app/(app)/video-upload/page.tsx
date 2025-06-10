@@ -41,7 +41,7 @@ function VideoUpload() {
     formData.append("originalSize", file.size.toString());
     try {
       const response = await axios.post("/api/video-upload", formData);
-      const error = response.data.error;
+      console.log("Video Upload Response:(Debugging console) ",response)
       toast({
         title: "Video uploaded successfully",
         variant: "default",

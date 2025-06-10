@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
         if (userWithPdf && userWithPdf.pdfs.length >= 6 && !userWithPdf.isPro) {
           return NextResponse.json(
-            { error: "Upload limit reached. You can only upload up to 6 PDFs." },
+            { error: "Upload limit reached. You can only upload up to 6 PDFs. Upgrade to Pro!" },
             { status: 403 }
           );
         }
