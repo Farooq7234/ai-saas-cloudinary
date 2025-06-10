@@ -6,13 +6,12 @@ import { Pdf, Video } from "@/types";
 import { useUser } from "@clerk/nextjs";
 import PdfCard from "@/components/PdfCard";
 import { Loader2 } from "lucide-react";
-import { ThemeProvider } from "@/components/theme-provider";
 function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [pdfs, setPdfs] = useState<Pdf[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { user } = useUser();
   const fetchPdfs = useCallback(async () => {
     try {   
       const response = await axios.get("/api/pdfs");

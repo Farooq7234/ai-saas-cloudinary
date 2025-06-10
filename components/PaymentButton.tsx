@@ -106,8 +106,6 @@ const confettiTrigger = () => {
                 variant: "default",
               })
               confettiTrigger()
-              // Redirect or refresh to update UI
-              window.location.reload()
             } else {
               toast({
                 title: "Payment verification failed!",
