@@ -8,7 +8,8 @@ const isPublicRoute = createRouteMatcher([
 ]);
 const isPublicApiRoute = createRouteMatcher([
   "/api/videos",
-  "/api/clerk-webhook"
+  "/api/clerk-webhook",
+  "/api/razorpay-webhook"
 ]);
 
 export default clerkMiddleware((auth, req) => {

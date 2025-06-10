@@ -47,6 +47,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File not found" }, { status: 400 });
     }
 
+      // Check if user has more than 6 videos
+        const userWithVideos = await prisma.user.findUnique({
+          where: { id: userId! },
+          include: { pdfs: true },
+        });
+
+        if (userWithVideos && userWithVideos.pdfs.length >= 6 && !userWithVideos.isPro) {
+          return NextResponse.json(
+            { error: "Upload limit reached. You can only upload up to 6 PDFs." },
+            { status: 403 }
+          );
+        }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 

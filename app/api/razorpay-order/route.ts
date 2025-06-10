@@ -1,9 +1,7 @@
 // app/api/razorpay-order/route.ts
 import Razorpay from "razorpay";
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
@@ -12,6 +10,11 @@ const razorpay = new Razorpay({
 
 export async function POST(req: NextRequest) {
   try {
+   // Check if Razorpay credentials are available
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      return NextResponse.json({ error: "Razorpay credentials not found" }, { status: 500 });
+    }
+
     const body = await req.json();
     const { amount } = body;
 
@@ -20,8 +23,6 @@ export async function POST(req: NextRequest) {
       currency: "INR",
       receipt: `receipt_order_${Date.now()}`,
     });
-
-
 
     return NextResponse.json({ order });
   } catch (error: any) {

@@ -39,21 +39,21 @@ function VideoUpload() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("originalSize", file.size.toString());
-    const response = await axios.post("/api/video-upload", formData);
-
-
     try {
+      const response = await axios.post("/api/video-upload", formData);
+      const error = response.data.error;
       toast({
-        title:  "Video uploaded successfully",
+        title: "Video uploaded successfully",
         variant: "default",
       });
       router.push("/");
     } catch (error) {
       console.error(error);
       toast({
-        title: response?.data?.error || (error as Error).message || "An error occurred during upload.",
+        title: (error as any)?.response?.data?.error ?? "Failed to upload video",
         variant: "destructive",
       });
+
     } finally {
       setIsUploading(false);
     }
@@ -111,7 +111,7 @@ function VideoUpload() {
 
             {/* Submit Button */}
             <Button type="submit" disabled={isUploading} className="w-full">
-              {isUploading ? <>Uploading Video <Loader2 className="animate-spin mx-2"/></> : "Upload Video"}
+              {isUploading ? <>Uploading Video <Loader2 className="animate-spin mx-2" /></> : "Upload Video"}
             </Button>
           </form>
         </CardContent>

@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
   try {
     const { userId } = auth();
 
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // if (!userId) {
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // }
 
     if (
       !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
@@ -51,14 +51,14 @@ export async function POST(request: NextRequest) {
 
     // Check if user has more than 6 videos
     const userWithVideos = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id: userId! },
       include: { videos: true },
     });
 
-    if (userWithVideos && userWithVideos.videos.length >= 1) {
+    if (userWithVideos && userWithVideos.videos.length >= 6 && !userWithVideos.isPro) {
       return NextResponse.json(
-      { error: "Upload limit reached. You can only upload up to 1 videos." },
-      { status: 403 }
+        { error: "Upload limit reached. You can only upload up to 6 videos." },
+        { status: 403 }
       );
     }
 
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     );
     const video = await prisma.video.create({
       data: {
-        UserId: userId,
+        UserId: userId! || "",
         title,
         description,
         publicId: result.public_id,
