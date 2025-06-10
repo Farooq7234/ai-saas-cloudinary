@@ -108,6 +108,9 @@ const confettiTrigger = () => {
                 variant: "default",
               })
               confettiTrigger()
+              setTimeout(() => {
+                window.location.reload()
+              }, 3000);
             } else {
               toast({
                 title: "Payment verification failed!",
