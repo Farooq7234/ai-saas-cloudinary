@@ -39,9 +39,10 @@ function VideoUpload() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("originalSize", file.size.toString());
+    const response = await axios.post("/api/video-upload", formData);
+
 
     try {
-      const response = await axios.post("/api/video-upload", formData);
       toast({
         title:  "Video uploaded successfully",
         variant: "default",
@@ -50,7 +51,7 @@ function VideoUpload() {
     } catch (error) {
       console.error(error);
       toast({
-        title: (error as any)?.response?.data?.error || (error as Error).message || "An error occurred during upload.",
+        title: response?.data?.error || (error as Error).message || "An error occurred during upload.",
         variant: "destructive",
       });
     } finally {
