@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     }
 
     await prisma.user.update({
-      where: { id: userId },
+      where: { id: 'user_2yJ52llksMKT7kjrPbZdK5XcH93' },
       data: { isPro: true },
     });
   }
