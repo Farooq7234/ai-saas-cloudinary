@@ -1,4 +1,4 @@
-import { useAuth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
     try {
-        const { userId } = useAuth();
+        const { userId } =  auth();
         if (!userId) {  
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
