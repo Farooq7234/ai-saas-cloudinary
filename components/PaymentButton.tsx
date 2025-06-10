@@ -1,16 +1,47 @@
 'use client'
 
 import { useUser } from '@clerk/nextjs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
-import {  useToast } from '@/hooks/use-toast'
+import { useToast } from '@/hooks/use-toast'
 
 export default function PaymentButton() {
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
   const { toast } = useToast()
-  
-const confettiTrigger = () => {
+  const [isPro, setIsPro] = useState(false)
+  const [checkingStatus, setCheckingStatus] = useState(true)
+
+  const fetchUserStatus = async () => {
+    try {   
+      const response = await fetch("/api/user-status", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user status')
+      }
+
+      const data = await response.json()
+      if (!data || typeof data.isPro !== 'boolean') {
+        throw new Error('Invalid response format')
+      }
+      setIsPro(data.isPro)
+    } catch (error) {
+      console.error("Error fetching user status:", error)
+      // Set to false on error so button shows (fail-safe)
+      setIsPro(false)
+    } finally {
+      setCheckingStatus(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchUserStatus()
+  }, [])
+
+  const confettiTrigger = () => {
     const end = Date.now() + 3 * 1000; // 3 seconds
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
  
@@ -97,6 +128,7 @@ const confettiTrigger = () => {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
+                userId: user?.id, // Add userId to verify-payment call
               }),
             })
             
@@ -106,6 +138,8 @@ const confettiTrigger = () => {
                 variant: "default",
               })
               confettiTrigger()
+              // Update local state to hide button
+              setIsPro(true)
             } else {
               toast({
                 title: "Payment verification failed!",
@@ -126,8 +160,8 @@ const confettiTrigger = () => {
           }
         },
         prefill: {
-          name: "Test User",
-          email: "test@example.com",
+          name: user?.fullName || "User",
+          email: user?.primaryEmailAddress?.emailAddress || "",
         },
         theme: {
           color: "#6366F1",
@@ -147,6 +181,23 @@ const confettiTrigger = () => {
     }
   }
 
+  // Show loading while checking status
+  if (checkingStatus) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm">
+          Checking status...
+        </div>
+      </div>
+    )
+  }
+
+  // Don't show anything if user is already Pro
+  if (isPro) {
+    return null
+  }
+
+  // Show payment button only for non-Pro users
   return (
     <div className="flex items-center justify-center">
       <button
@@ -154,7 +205,7 @@ const confettiTrigger = () => {
         disabled={loading}
         className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg text-sm transition-colors"
       >
-        {loading ? "Processing..." : "Upgrade to Pro – ₹99"}
+        {loading ? "Processing..." : "Upgrade to Pro - ₹99"}
       </button>
     </div>
   )
