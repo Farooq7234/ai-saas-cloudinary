@@ -50,8 +50,7 @@ function VideoUpload() {
     } catch (error) {
       console.error(error);
       toast({
-        title: "Video upload failed",
-        description: (error as any)?.response?.data?.error || (error as Error).message || "An error occurred during upload.",
+        title: (error as any)?.response?.data?.error || (error as Error).message || "An error occurred during upload.",
         variant: "destructive",
       });
     } finally {
