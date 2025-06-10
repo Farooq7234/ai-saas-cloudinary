@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { PrismaClient } from "@prisma/client";
-import { useAuth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-  const { userId } = useAuth();
+  const { userId } = auth();
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" , message:"User is not authenticated for Razorpay webhook" }, { status: 401 });
   }
