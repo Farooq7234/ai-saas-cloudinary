@@ -6,6 +6,7 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up",
   "/",
   "/home",
+  "/api/clerk-webhook(.*)",
 ]);
 const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
 
