@@ -21,6 +21,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/ModeToggle";
 import { ThemeProvider } from "@/components/theme-provider";
+import PaymentButton from "@/components/PaymentButton";
 
 const sidebarItems = [
   { href: "/home", icon: LayoutDashboardIcon, label: "Home Page" },
@@ -164,6 +165,7 @@ export default function AppLayout({
               </div>
               <div className="flex items-center space-x-4">
                 <ModeToggle />
+                <PaymentButton/>
                 {user && (
                   <>
                     <Avatar>

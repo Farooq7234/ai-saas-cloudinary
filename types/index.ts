@@ -21,4 +21,13 @@ export interface Pdf {
     createdAt: Date
     updatedAt: Date
 }
+export interface User {
+    id: string
+    isPro: boolean
+    razorpayId: string
+    createdAt: Date
+    updatedAt: Date
+    videos: Video[]
+    pdfs: Pdf[]
+}
 
