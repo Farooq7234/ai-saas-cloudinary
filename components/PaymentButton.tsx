@@ -1,15 +1,44 @@
 'use client'
 
-
 import { useUser } from '@clerk/nextjs'
 import { useState } from 'react'
+import confetti from 'canvas-confetti'
+import {  useToast } from '@/hooks/use-toast'
 
 export default function PaymentButton() {
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
+  const { toast } = useToast()
   
-  // Move auth() to useEffect or make this a server component wrapper
-  // For now, let's handle this differently
+const confettiTrigger = () => {
+    const end = Date.now() + 3 * 1000; // 3 seconds
+    const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+ 
+    const frame = () => {
+      if (Date.now() > end) return;
+ 
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      });
+ 
+      requestAnimationFrame(frame);
+    };
+ 
+    frame();
+  };
   
   const loadRazorpayScript = (): Promise<boolean> =>
     new Promise((resolve) => {
@@ -32,7 +61,9 @@ export default function PaymentButton() {
       
       const res = await loadRazorpayScript()
       if (!res) {
-        alert("Razorpay SDK failed to load.")
+        toast({
+          title: "Razorpay SDK failed to load",
+        })
         return
       }
 
@@ -70,15 +101,25 @@ export default function PaymentButton() {
             })
             
             if (verifyRes.ok) {
-              alert("Payment Successful!")
+              toast({
+                title: "Payment successful! You are now a Pro user.",   
+                variant: "default",
+              })
+              confettiTrigger()
               // Redirect or refresh to update UI
               window.location.reload()
             } else {
-              alert("Payment verification failed!")
+              toast({
+                title: "Payment verification failed!",
+                variant: "destructive",
+              })  
             }
           } catch (error) {
             console.error("Payment verification error:", error)
-            alert("Payment verification failed!")
+            toast({
+              title: "Payment verification failed!",
+              variant: "destructive",
+            })
           }
         },
         modal: {
@@ -99,7 +140,10 @@ export default function PaymentButton() {
       paymentObject.open()
     } catch (error) {
       console.error("Payment error:", error)
-      alert("Something went wrong. Please try again.")
+      toast({
+        title: "Something went wrong. Please try again.",
+        variant: "destructive",
+      })
     } finally {
       setLoading(false)
     }
