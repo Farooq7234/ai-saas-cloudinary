@@ -6,6 +6,7 @@ import { CallToAction } from "@/components/CallToAction";
 import { Footer } from "@/components/Footer";
 import { WorldMapDemo } from "@/components/WorldMap";
 import { Hero } from "@/components/HeroSection";
+import PricingSection from "@/components/PricingSection";
 
 
 function Page() {
@@ -15,6 +16,7 @@ function Page() {
       <Hero/>
       <LogoTicker />
       <Features />
+      <PricingSection/>
       <Testimonials />
       <WorldMapDemo />
       <CallToAction />
