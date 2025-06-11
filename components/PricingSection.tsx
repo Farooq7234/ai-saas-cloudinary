@@ -36,7 +36,7 @@ const PricingSection = () => {
         '10GB storage space',
         'Email support'
       ],
-      buttonText: 'Start 14-Day Free Trial',
+      buttonText: 'Get Started',
       popular: true,
       icon: Zap
     }
