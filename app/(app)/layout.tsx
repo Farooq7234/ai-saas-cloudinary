@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useClerk, useUser } from "@clerk/nextjs";
+import { useClerk, UserButton, useUser } from "@clerk/nextjs";
 import {
   LogOutIcon,
   MenuIcon,
@@ -17,11 +17,9 @@ import {
 // Shadcn/ui components
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/ModeToggle";
 import { ThemeProvider } from "@/components/theme-provider";
-import PaymentButton from "@/components/PaymentButton";
 
 const sidebarItems = [
   { href: "/home", icon: LayoutDashboardIcon, label: "Home Page" },
@@ -170,20 +168,7 @@ export default function AppLayout({
                 {/* User Avatar and Sign Out */}
                 {user && (
                   <>
-                    <Avatar>
-                      <AvatarImage
-                        src={user.imageUrl}
-                        alt={user.username || user.emailAddresses[0].emailAddress}
-                      />
-                      <AvatarFallback>
-                        {user.username
-                          ? user.username.charAt(0)
-                          : user.emailAddresses[0].emailAddress.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm truncate max-w-xs">
-                      {user.firstName || user.emailAddresses[0].emailAddress}
-                    </span>
+                    <UserButton />
                     <Button variant="ghost" onClick={handleSignOut}>
                       <LogOutIcon className="w-6 h-6" />
                     </Button>

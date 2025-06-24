@@ -89,8 +89,8 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white ">
-      <Card className="w-[350px]  sm:w-full max-w-md  bg-white text-black shadow-lg">
+    <div className="flex items-center justify-center min-h-screen ">
+      <Card className="w-[350px]  sm:w-full max-w-md   shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
             Sign Up for Quality Keeper
@@ -164,7 +164,7 @@ export default function SignUp() {
               <Button
                 type="submit"
                 disabled={isSignUp}
-                className="w-full bg-black text-white"
+                className="w-full "
               >
                 Sign Up
               </Button>
@@ -189,7 +189,7 @@ export default function SignUp() {
               <Button
                 type="submit"
                 disabled={isVerify}
-                className="w-full dark:bg-black dark:text-white"
+                className="w-full "
               >
                 Verify Email
               </Button>

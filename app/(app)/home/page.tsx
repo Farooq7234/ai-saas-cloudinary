@@ -50,12 +50,7 @@ function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchVideos();
-    fetchPdfs();
-  }, [fetchVideos, fetchPdfs]);
-
-  const fetchUserStatus = async () => {
+    const fetchUserStatus = async () => {
     try {
       const response = await fetch("/api/user-status");
       if (!response.ok) {
@@ -72,8 +67,11 @@ function Home() {
   };
 
   useEffect(() => {
-    fetchUserStatus();
-  }, []);
+    fetchVideos();
+    fetchPdfs();
+    fetchUserStatus()
+  }, [fetchVideos, fetchPdfs]);
+
 
   const handleDownload = useCallback((url: string, title: string) => {
     {
@@ -99,7 +97,7 @@ function Home() {
     <div className="container mx-auto p-4  ">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Hi 👋, <span className="capitalize">{user?.firstName}</span>!</h1>
-        {!isPro && !loading && <PaymentButton />}
+        { <PaymentButton loading= {loading}/>}
       </div>
       {videos.length === 0 && pdfs.length === 0 ? (
         <div className="text-center text-lg text-gray-500">
