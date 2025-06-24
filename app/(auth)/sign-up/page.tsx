@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import {  useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
