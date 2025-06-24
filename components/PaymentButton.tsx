@@ -7,9 +7,9 @@ import {  useToast } from '@/hooks/use-toast'
 import { RainbowButton } from './magicui/rainbow-button'
 
 export default function PaymentButton() {
-  const [loading, setLoading] = useState(false)
   const { user } = useUser()
   const { toast } = useToast()
+  const [loading, setLoading] = useState(false)
 
   
 const confettiTrigger = () => {
